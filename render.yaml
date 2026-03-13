@@ -4,8 +4,8 @@ services:
     env: node
     region: oregon
     plan: free
-    buildCommand: pnpm install && pnpm prisma generate && pnpm build
-    startCommand: pnpm start:prod
+    buildCommand: pnpm install && pnpm prisma generate && pnpm run build
+    startCommand: node dist/main.js
     envVars:
       - key: NODE_ENV
         value: production
@@ -19,6 +19,8 @@ services:
         value: 7d
       - key: FRONTEND_URL
         value: https://shift-sync-three.vercel.app
+      - key: PORT
+        value: 10000
 
 databases:
   - name: shiftsync-db
