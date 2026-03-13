@@ -1,0 +1,24 @@
+import { PrismaClient } from '@prisma/client';
+import * as bcrypt from 'bcrypt';
+import { addDays, startOfWeek, setHours, setMinutes } from 'date-fns';
+
+const prisma = new PrismaClient();
+
+async function main() {
+  console.log('Starting seed...');
+  
+  await prisma.$transaction(async (tx) => {
+    await tx.auditLog.deleteMany();
+    await tx.notification.deleteMany();
+    await tx.swapRequest.deleteMany();
+    await tx.shiftAssignment.deleteMany();
+    await tx.shift.deleteMany();
+    await tx.availability.deleteMany();
+    await tx.managerLocation.deleteMany();
+    await tx.staffProfile.deleteMany();
+    await tx.user.deleteMany();
+    await tx.skill.deleteMany();
+    await tx.location.deleteMany();
+  });
+  
+  const hashedPassword = await bcrypt.hash('password', 10);
