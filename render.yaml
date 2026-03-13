@@ -4,8 +4,8 @@ services:
     env: node
     region: oregon
     plan: free
-    buildCommand: pnpm install && pnpm prisma generate && pnpm run build
-    startCommand: node dist/main.js
+    buildCommand: pnpm install && pnpm prisma generate && pnpm run build && ls -la && ls -la dist
+    startCommand: cd /opt/render/project/src && node dist/main.js
     envVars:
       - key: NODE_ENV
         value: production
